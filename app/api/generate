@@ -1,0 +1,34 @@
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+
+    const prompt = body.prompt || "";
+
+    return NextResponse.json({
+      success: true,
+      website: {
+        title: "Generated Rave Website",
+        prompt,
+        pages: [
+          "Home",
+          "Events",
+          "Tickets",
+          "Gallery",
+          "Artists",
+          "FAQ",
+          "Contact"
+        ]
+      }
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Generation failed"
+      },
+      { status: 500 }
+    );
+  }
+}
