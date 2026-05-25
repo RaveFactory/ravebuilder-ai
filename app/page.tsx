@@ -183,7 +183,29 @@ function exportAllZip(pages: Record<string, string>, template: string) {
 /* ─── Page ──────────────────────────────────────────────────────────── */
 
 export default function Page() {
-  const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
+  const handleGenerate = async () => {
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        prompt
+      })
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    alert("Website generated successfully!");
+  } catch (error) {
+    console.error(error);
+
+    alert("Generation failed");
+  }
+};  const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
   const [prompt, setPrompt]             = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [pages, setPages]               = useState<Record<string, string>>({});
