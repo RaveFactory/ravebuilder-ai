@@ -2,12 +2,13 @@
   "name": "@workspace/ravebuilder",
   "version": "0.0.0",
   "private": true,
-  
-  "type": ""scripts": {
-  "dev": "next dev --port 3000 --hostname 0.0.0.0",
-  "build": "next build",
-  "start": "next start --port 3000 --hostname 0.0.0.0"
-},
+  "type": "module",
+
+  "scripts": {
+    "dev": "next dev --port 3000 --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --port 3000 --hostname 0.0.0.0"
+  },
 
   "dependencies": {
     "next": "14.2.5",
