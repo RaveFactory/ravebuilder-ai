@@ -15,83 +15,22 @@ export async function POST(req: Request) {
           messages: [
             {
               role: "system",
-              content: `
-You are RaveBuilder AI.
-
-You MUST return ONLY valid JSON.
-
-Do not explain anything.
-Do not add markdown.
-Do not add text before or after JSON.
-
-Return this exact structure:
-
-{
-  "pages": [
-    {
-      "name": "Home",
-      "html": "<html><body><h1>Example</h1></body></html>"
-    },
-    {
-      "name": "Gallery",
-      "html": "<html><body><img src='https://picsum.photos/800/600' /></body></html>"
-    }
-  ]
-}
-              `,
+              content:
+                "Return ONLY valid JSON with pages array.",
             },
             {
               role: "user",
               content: prompt,
             },
           ],
-          temperature: 0.1,
-          max_tokens: 4000,
+          temperature: 0.2,
         }),
       }
     );
 
     const data = await response.json();
 
-    console.log(data);
-
-    const raw = data.choices?.[0]?.message?.content;
-
-    if (!raw) {
-      return Response.json(
-        {
-          error: "Empty response from Mistral",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
-    const cleaned = raw
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    let parsed;
-
-    try {
-      parsed = JSON.parse(cleaned);
-    } catch (e) {
-      console.error(cleaned);
-
-      return Response.json(
-        {
-          error: "Invalid JSON returned by Mistral",
-          raw: cleaned,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
-    return Response.json(parsed);
+    return Response.json(data);
   } catch (error) {
     console.error(error);
 
