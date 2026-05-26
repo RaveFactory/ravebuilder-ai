@@ -195,24 +195,25 @@ export default function Page() {
       })
     });
 
-    const raw = await response.json();
-
-console.log(raw);
-
-const content =
-  raw?.choices?.[0]?.message?.content || "{}";
-
-const data = JSON.parse(content);
+const data = await response.json();
 
 console.log(data);
 
-alert("Website generated successfully!");
-  } catch (error) {
-    console.error(error);
+if (!data.pages) {
+  throw new Error("Invalid response");
+}
 
-    alert("Generation failed");
-  }
-};  const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
+setPages(data.pages);
+
+setHasGenerated(true);
+
+alert("Website generated successfully!");
+} catch (error) {
+  console.error(error);
+  alert("Generation failed");
+}
+}; 
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
   const [prompt, setPrompt]             = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [pages, setPages]               = useState<Record<string, string>>({});
