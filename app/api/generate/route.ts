@@ -30,7 +30,7 @@ Return this exact structure:
   "pages": [
     {
       "name": "Home",
-      "html": "<html><body>Example</body></html>"
+      "html": "<html><body><img src='https://picsum.photos/800/600' /></body></html>"
     }
   ]
 }
