@@ -195,11 +195,18 @@ export default function Page() {
       })
     });
 
-    const data = await response.json();
+    const raw = await response.json();
 
-    console.log(data);
+console.log(raw);
 
-    alert("Website generated successfully!");
+const content =
+  raw?.choices?.[0]?.message?.content || "{}";
+
+const data = JSON.parse(content);
+
+console.log(data);
+
+alert("Website generated successfully!");
   } catch (error) {
     console.error(error);
 
