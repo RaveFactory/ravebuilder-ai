@@ -4,6 +4,7 @@ export async function POST(req: Request) {
   try {
     const { prompt } = await req.json();
 
+   console.log("MISTRAL KEY EXISTS:", !!process.env.MISTRAL_API_KEY);
     const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -11,7 +12,7 @@ export async function POST(req: Request) {
         Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "mistral-small",
+        model: "mistral-small-latest",
         messages: [
           {
             role: "system",
