@@ -2,7 +2,6 @@
 
 console.log("NEW BUILD TEST");
 
-
 import { useState } from "react";
 
 export default function Page() {
