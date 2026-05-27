@@ -211,12 +211,17 @@ setPages(data.pages);
 setHasGenerated(true);
 
 alert("Website generated successfully!");
-  } catch (error) {
-    console.error(error);
-    alert("Generation failed");
-  } finally {
-    setIsGenerating(false);
+} catch (error) {
+  console.error("REAL ERROR:", error);
+
+  if (error instanceof Error) {
+    alert(error.message);
+  } else {
+    alert(JSON.stringify(error));
   }
+} finally {
+  setIsGenerating(false);
+}
 };
   const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
   const [prompt, setPrompt]             = useState("");
