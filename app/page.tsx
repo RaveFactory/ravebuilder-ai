@@ -197,18 +197,19 @@ const handleGenerate = async () => {
       }),
     });
 
-    const data = await response.json();
+ const data = await response.json();
 
-    console.log(data);
+console.log("FINAL DATA:", data);
 
-    if (!data.pages) {
-      throw new Error("Invalid response");
-    }
+if (!data || !Array.isArray(data.pages)) {
+  console.error("INVALID DATA", data);
+  throw new Error("Invalid response");
+}
 
-    setPages(data.pages);
-    setHasGenerated(true);
+setPages(data.pages);
+setHasGenerated(true);
 
-    alert("Website generated successfully!");
+alert("Website generated successfully!");
   } catch (error) {
     console.error(error);
     alert("Generation failed");
