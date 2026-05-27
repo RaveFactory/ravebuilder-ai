@@ -55,7 +55,19 @@ Format:
     let parsed;
 
     try {
-      parsed = JSON.parse(content);
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+
+if (!jsonMatch) {
+  return Response.json(
+    {
+      error: "No JSON found",
+      raw: content,
+    },
+    { status: 500 }
+  );
+}
+
+parsed = JSON.parse(jsonMatch[0]);
     } catch (err) {
       console.error("JSON PARSE ERROR:", content);
 
