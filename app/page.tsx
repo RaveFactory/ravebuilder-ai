@@ -200,6 +200,7 @@ const handleGenerate = async () => {
  const data = await response.json();
 
 console.log("FINAL DATA:", data);
+alert(JSON.stringify(data));
 
 if (!data || !Array.isArray(data.pages)) {
   console.error("INVALID DATA", data);
