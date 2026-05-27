@@ -4,7 +4,6 @@ export async function POST(req: Request) {
   try {
     const { prompt } = await req.json();
 
-   console.log("MISTRAL KEY EXISTS:", !!process.env.MISTRAL_API_KEY);
     const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -16,82 +15,37 @@ export async function POST(req: Request) {
         messages: [
           {
             role: "system",
-            content: `
-Return ONLY valid JSON.
-
-Format:
-
-{
-  "pages": [
-    {
-      "name": "Home",
-      "html": "<html><body><h1>Hello</h1></body></html>"
-    }
-  ]
-}
-`,
+            content:
+              "Return ONLY raw HTML. No markdown. No JSON. No explanation.",
           },
           {
             role: "user",
-            content: prompt,
+            content:
+              prompt +
+              " Create a cyberpunk rave landing page in pure HTML.",
           },
         ],
-        temperature: 0.7,
       }),
     });
 
     const raw = await response.json();
 
-    console.log(raw);
+    const html =
+      raw?.choices?.[0]?.message?.content ||
+      "<html><body><h1>Error</h1></body></html>";
 
-    const content =
-      raw?.choices?.[0]?.message?.content || "";
-
-    const cleaned = content
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    const data = JSON.parse(cleaned);
-
-    return NextResponse.json(data);
+    return NextResponse.json({
+      pages: [
+        {
+          name: "Home",
+          html,
+        },
+      ],
+    });
   } catch (error) {
     console.error(error);
 
     return NextResponse.json(
-      {
-        error: "Generation failed",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-}
-}
-`,
-          },
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        temperature: 0.7,
-      }),
-    });
-
-    const raw = await response.json();
-
-    const content =
-      raw?.choices?.[0]?.message?.content || '{"pages": []}';
-
-    const data = JSON.parse(content);
-
-    return Response.json(data);
-  } catch (error) {
-    console.error(error);
-
-    return Response.json(
       {
         error: "Generation failed",
       },
