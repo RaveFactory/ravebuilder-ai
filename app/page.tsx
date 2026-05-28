@@ -185,16 +185,7 @@ function exportAllZip(pages: Record<string, string>, template: string) {
 export default function Page() {
   const handleGenerate = async () => {
   try {
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        prompt
-      })
-    });
-
+    
 const response = await fetch("/api/generate", {
   method: "POST",
   headers: {
