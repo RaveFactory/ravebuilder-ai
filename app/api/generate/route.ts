@@ -2,13 +2,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    console.log("BODY:", body);
-
-    console.log(
-      "API KEY EXISTS:",
-      !!process.env.MISTRAL_API_KEY
-    );
-
     const response = await fetch(
       "https://api.mistral.ai/v1/chat/completions",
       {
@@ -19,9 +12,6 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           model: "open-mistral-7b",
-          response_format: {
-            type: "json_object",
-          },
           messages: [
             {
               role: "system",
@@ -30,7 +20,12 @@ You are RaveBuilder AI.
 
 Return ONLY valid JSON.
 
-Format:
+Do not use markdown.
+Do not use \`\`\`.
+Do not explain anything.
+
+Return this exact structure:
+
 {
   "pages": {
     "home": "<html><body><h1>Home</h1></body></html>",
@@ -59,43 +54,19 @@ Format:
       }
     );
 
-    console.log("STATUS:", response.status);
-
     const raw = await response.json();
 
-    console.log("RAW:", raw);
+    let content =
+      raw?.choices?.[0]?.message?.content || "";
 
-    const content =
-      raw?.choices?.[0]?.message?.content;
+    content = content
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-    if (!content) {
-      return Response.json(
-        {
-          error: "Empty response from Mistral",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    console.log("CLEAN CONTENT:", content);
 
-    let data;
-
-    try {
-      data = JSON.parse(content);
-    } catch (err) {
-      console.error("JSON PARSE ERROR:", err);
-
-      return Response.json(
-        {
-          error: "Invalid JSON from Mistral",
-          raw: content,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    const data = JSON.parse(content);
 
     return Response.json(data);
   } catch (error) {
