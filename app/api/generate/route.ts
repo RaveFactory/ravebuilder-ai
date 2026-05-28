@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             `Bearer ${process.env.MISTRAL_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "mistral-small",
+          model: "open-mistral-7b",
           response_format: {
             type: "json_object",
           },
