@@ -1,5 +1,4 @@
-use client";
-
+"use client";
 import { useState } from "react";
 import { strToU8, zip as fflateZip } from "fflate";
 import { useHistory } from "./hooks/useHistory";
