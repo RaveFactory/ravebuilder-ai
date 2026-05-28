@@ -10,15 +10,17 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: "mistral-small",
+        response_format: { type: "json_object" },
         messages: [
           {
             role: "system",
             content: `
-You are a website generator.
+You are RaveBuilder AI.
 
 Return ONLY valid JSON.
 
 Format:
+
 {
   "pages": [
     {
@@ -40,55 +42,22 @@ Format:
 
     const raw = await response.json();
 
-    console.log("MISTRAL RAW:", raw);
-
     const content =
-      raw?.choices?.[0]?.message?.content;
+      raw?.choices?.[0]?.message?.content || '{"pages": []}';
 
-    if (!content) {
-      return Response.json(
-        { error: "Empty response from Mistral" },
-        { status: 500 }
-      );
-    }
+    const data = JSON.parse(content);
 
-    let parsed;
-
-    try {
-      const jsonMatch = content.match(/\{[\s\S]*\}/);
-
-if (!jsonMatch) {
-  return Response.json(
-    {
-      error: "No JSON found",
-      raw: content,
-    },
-    { status: 500 }
-  );
-}
-
-parsed = JSON.parse(jsonMatch[0]);
-    } catch (err) {
-      console.error("JSON PARSE ERROR:", content);
-
-      return Response.json(
-        {
-          error: "Invalid JSON from Mistral",
-          raw: content,
-        },
-        { status: 500 }
-      );
-    }
-
-    return Response.json(parsed);
-  } catch (err) {
-    console.error(err);
+    return Response.json(data);
+  } catch (error) {
+    console.error(error);
 
     return Response.json(
       {
-        error: String(err),
+        error: "Generation failed",
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }
