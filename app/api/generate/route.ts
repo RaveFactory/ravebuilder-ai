@@ -1,117 +1,81 @@
 export async function POST(req: Request) {
   try {
-    const { prompt, template } = await req.json();
+    const body = await req.json();
+
+    console.log("BODY:", body);
+
     const response = await fetch(
       "https://api.mistral.ai/v1/chat/completions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:
-            `Bearer ${process.env.MISTRAL_API_KEY}`,
+          Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
         },
         body: JSON.stringify({
           model: "open-mistral-7b",
-          response_format: {
-            type: "json_object",
-          },
           messages: [
             {
               role: "system",
-              content: `
-You are RaveBuilder AI.
-Return ONLY valid JSON.
-Do not use markdown.
-Do not use backticks.
-Do not explain anything.
-Generate a complete multi-page rave website.
-The HTML must include:
-- full HTML structure
-- inline CSS
-- responsive design
-- dark rave aesthetic
-- modern layout
-Return EXACTLY this format:
-{
-  "pages": {
-    "home": "<html>...</html>",
-    "event": "<html>...</html>",
-    "tickets": "<html>...</html>",
-    "gallery": "<html>...</html>",
-    "faq": "<html>...</html>",
-    "blog": "<html>...</html>",
-    "contact": "<html>...</html>"
-  },
-  "seo": {
-    "title": "Website title",
-    "description": "Website description",
-    "keywords": "music, rave, techno"
-  }
-}
-`,
+              content:
+                "Return ONLY valid JSON with pages and seo.",
             },
             {
               role: "user",
-              content:
-                `Template: ${template}\n\n${prompt}`,
+              content: `
+Generate a rave festival website.
+
+Return this exact JSON format:
+
+{
+  "pages": {
+    "home": "<html><body><h1>HOME</h1></body></html>",
+    "event": "<html><body><h1>EVENT</h1></body></html>",
+    "tickets": "<html><body><h1>TICKETS</h1></body></html>",
+    "gallery": "<html><body><h1>GALLERY</h1></body></html>",
+    "faq": "<html><body><h1>FAQ</h1></body></html>",
+    "blog": "<html><body><h1>BLOG</h1></body></html>",
+    "contact": "<html><body><h1>CONTACT</h1></body></html>"
+  },
+  "seo": {
+    "title": "Rave Festival",
+    "description": "Best rave festival website",
+    "keywords": "rave, hardtek, techno"
+  }
+}
+`,
             },
           ],
           temperature: 0.7,
         }),
       }
     );
+
     const raw = await response.json();
-    console.log("MISTRAL RAW:", raw);
+
+    console.log("RAW RESPONSE:", JSON.stringify(raw));
+
     const content =
       raw?.choices?.[0]?.message?.content;
+
     if (!content) {
       return Response.json(
         {
-          error:
-            "Empty response from Mistral",
+          error: "No content returned",
+          raw,
         },
         {
           status: 500,
         }
       );
     }
-    let data;
-    try {
-      data = JSON.parse(content);
-    } catch (err) {
-      console.error(
-        "JSON PARSE ERROR:",
-        err
-      );
-      return Response.json(
-        {
-          error:
-            "Invalid JSON from Mistral",
-          raw: content,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-    if (
-      !data.pages ||
-      typeof data.pages !== "object"
-    ) {
-      return Response.json(
-        {
-          error:
-            "Missing pages object",
-          raw: data,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+
+    const data = JSON.parse(content);
+
     return Response.json(data);
   } catch (error) {
-    console.error(error);
+    console.error("FULL ERROR:", error);
+
     return Response.json(
       {
         error: "Generation failed",
