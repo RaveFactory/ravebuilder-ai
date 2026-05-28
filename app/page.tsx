@@ -195,28 +195,23 @@ export default function Page() {
       })
     });
 
+const response = await fetch("/api/generate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    prompt,
+  }),
+});
+
 const data = await response.json();
-
-console.log("FULL DATA:", data);
-
-if (
-  !data ||
-  !data.pages ||
-  !Array.isArray(data.pages) ||
-  !data.pages[0]
-) {
-  alert(JSON.stringify(data, null, 2));
-  return;
-}
 
 setPages(data.pages);
 
 setHasGenerated(true);
-
-alert("Website generated successfully!");
 } catch (error) {
   console.error(error);
-  alert("Generation failed");
 }
 }; 
   const [selectedTemplate, setSelectedTemplate] = useState<Template>("cyberpunk");
