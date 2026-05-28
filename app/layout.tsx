@@ -1,11 +1,10 @@
+import "./globals.css";
 import type { Metadata } from "next";
-
 export const metadata: Metadata = {
-  title: "RaveBuilder AI — Cyberpunk Website Builder",
+  title: "RaveBuilder AI",
   description:
-    "Generate stunning cyberpunk, hardtek, jungle, and minimal websites with AI. Just describe your vision and watch it come alive.",
+    "Generate rave and cyberpunk websites with AI.",
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -13,7 +12,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="scanlines cyber-grid min-h-screen antialiased">
+      <body
+        className="
+          scanlines
+          cyber-grid
+          min-h-screen
+          antialiased
+        "
+      >
         {children}
       </body>
     </html>
