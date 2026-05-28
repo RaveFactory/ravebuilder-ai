@@ -13,7 +13,7 @@ export async function POST(req: Request) {
           Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "open-mistral-7b",
+          model: "mistral-small",
           messages: [
             {
               role: "system",
