@@ -197,10 +197,16 @@ export default function Page() {
 
 const data = await response.json();
 
-console.log(data);
+console.log("FULL DATA:", data);
 
-if (!data.pages) {
-  throw new Error("Invalid response");
+if (
+  !data ||
+  !data.pages ||
+  !Array.isArray(data.pages) ||
+  !data.pages[0]
+) {
+  alert(JSON.stringify(data, null, 2));
+  return;
 }
 
 setPages(data.pages);
