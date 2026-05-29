@@ -64,21 +64,24 @@ Return this exact structure:
       .replace(/```/g, "")
       .trim();
 
-    console.log("CLEAN CONTENT:", content);
+ console.log("CLEAN CONTENT:", content);
 
-    const data = JSON.parse(content);
+try {
+  const data = JSON.parse(content);
 
-    return Response.json(data);
-  } catch (error) {
-    console.error("FULL ERROR:", error);
+  return Response.json(data);
+} catch (err) {
+  console.error("JSON PARSE ERROR:", err);
+  console.error("RAW CONTENT:", content);
 
-    return Response.json(
-      {
-        error: "Generation failed",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return Response.json(
+    {
+      error: "Invalid JSON from Mistral",
+      raw: content,
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }
