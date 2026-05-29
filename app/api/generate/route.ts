@@ -163,16 +163,17 @@ Return exactly:
         }
       );
     }
-  } catch (error) {
-    console.error("FULL ERROR:", error);
+  } catch (err) {
+  console.error("JSON PARSE ERROR:", err);
 
-    return Response.json(
-      {
-        error: "Generation failed",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return Response.json(
+    {
+      error: "Invalid JSON from Mistral",
+      raw: content,
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }
