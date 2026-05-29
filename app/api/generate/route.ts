@@ -61,6 +61,7 @@ Generate these pages:
 - faq
 - blog
 - contact
+
 For festival websites use only images of:
 
 - concert crowd
@@ -189,6 +190,16 @@ Generate realistic festival websites using:
 - realistic venues
 
 Avoid generic marketing sections.
+
+SEO fields are mandatory.
+
+Never return empty values.
+
+Example:
+
+"title":"Hardtek Festival France 2026",
+"description":"Festival hardtek underground à Paris",
+"keywords":"hardtek, rave, techno, festival"
 
 SEO fields are mandatory.
 
