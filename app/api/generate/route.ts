@@ -11,7 +11,7 @@ export async function POST(req: Request) {
           Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "open-mistral-7b",
+          model: "mistral-small-latest",
           messages: [
             {
               role: "system",
@@ -20,11 +20,15 @@ You are RaveBuilder AI.
 
 Return ONLY valid JSON.
 
-Do not use markdown.
-Do not use \`\`\`.
-Do not explain anything.
+IMPORTANT:
+- No markdown
+- No explanations
+- No code blocks
+- Return exactly one JSON object
+- All HTML must be on a single line
+- Do not include line breaks inside HTML strings
 
-Return this exact structure:
+Return this structure:
 
 {
   "pages": {
@@ -56,45 +60,45 @@ Return this exact structure:
 
     const raw = await response.json();
 
-let content =
-  raw?.choices?.[0]?.message?.content || "";
+    let content =
+      raw?.choices?.[0]?.message?.content || "";
 
-content = content
-  .replace(/```json/g, "")
-  .replace(/```/g, "")
-  .trim();
+    content = content
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .replace(/\r/g, "")
+      .trim();
 
-console.log("CLEAN CONTENT:", content);
+    console.log("CLEAN CONTENT:", content);
 
-try {
-  const data = JSON.parse(content);
+    try {
+      const data = JSON.parse(content);
 
-  return Response.json(data);
-} catch (err) {
-  console.error("JSON PARSE ERROR:", err);
-  console.error("RAW CONTENT:", content);
+      return Response.json(data);
+    } catch (err) {
+      console.error("JSON PARSE ERROR:", err);
+      console.error("RAW CONTENT:", content);
 
-  return Response.json(
-    {
-      error: "Invalid JSON from Mistral",
-      raw: content,
-    },
-    {
-      status: 500,
+      return Response.json(
+        {
+          error: "Invalid JSON from Mistral",
+          raw: content,
+        },
+        {
+          status: 500,
+        }
+      );
     }
-  );
-}
+  } catch (error) {
+    console.error("FULL ERROR:", error);
 
-} catch (error) {
-  console.error("FULL ERROR:", error);
-
-  return Response.json(
-    {
-      error: "Generation failed",
-    },
-    {
-      status: 500,
-    }
-  );
-}
+    return Response.json(
+      {
+        error: "Generation failed",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
