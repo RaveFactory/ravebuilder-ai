@@ -158,17 +158,12 @@ Return exactly:
     error: "Invalid JSON from Mistral",
   },
   {
-    status: 500,
-  }
-);
-    }
-  } catch (err) {
-  console.error("JSON PARSE ERROR:", err);
+    status: } catch (err) {
+  console.error("FULL ERROR:", err);
 
   return Response.json(
     {
-      error: "Invalid JSON from Mistral",
-      raw: content,
+      error: "Generation failed",
     },
     {
       status: 500,
