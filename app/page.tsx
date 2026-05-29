@@ -463,19 +463,20 @@ export default function Page() {
               </div>
             )}
             {currentHtml && (
-              <iframe
-                srcDoc={currentHtml}
-                title="preview"
-                sandbox="allow-scripts"
-                style={{
-                  width: "100%",
-                  height: "800px",
-                  border:
-                    "1px solid #333",
-                  background: "white",
-                  borderRadius: "6px",
-                }}
-              />
+             <iframe
+  srcDoc={currentHtml}
+  title="preview"
+  sandbox="allow-scripts"
+  style={{
+    width: "100%",
+    maxWidth: "100%",
+    height: "900px",
+    border: "1px solid #333",
+    background: "white",
+    borderRadius: "12px",
+    overflow: "hidden",
+  }}
+/>
             )}
             <div
               style={{
