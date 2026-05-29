@@ -63,13 +63,44 @@ Generate these pages:
 - contact
 
 Each page must include:
-- navigation menu
-- hero section
-- cards
-- buttons
+
+- responsive navigation menu
+- mobile first design
+- max-width:1200px
+- navigation displayed with flexbox
+- gap between menu items
+- cards displayed with CSS grid
+- images responsive
+- body margin:0
+- box-sizing:border-box
 - footer
-- responsive layout
+- modern UI
 - embedded CSS
+
+All HTML pages must contain a complete CSS block inside <style>.
+
+The navigation menu must use:
+
+nav{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+justify-content:center;
+}
+
+All images must use:
+
+img{
+max-width:100%;
+height:auto;
+display:block;
+}
+
+All elements must use:
+
+*{
+box-sizing:border-box;
+}
 
 Return exactly:
 
