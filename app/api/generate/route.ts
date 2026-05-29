@@ -154,14 +154,13 @@ Return exactly:
       console.error("RAW CONTENT:", content);
 
       return Response.json(
-        {
-          error: "Invalid JSON from Mistral",
-          raw: content,
-        },
-        {
-          status: 500,
-        }
-      );
+  {
+    error: "Invalid JSON from Mistral",
+  },
+  {
+    status: 500,
+  }
+);
     }
   } catch (err) {
   console.error("JSON PARSE ERROR:", err);
