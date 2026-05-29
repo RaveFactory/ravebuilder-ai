@@ -14,8 +14,8 @@ export async function POST(req: Request) {
           model: "mistral-small-latest",
           messages: [
             {
-              role: "system",
-              content: `
+  role: "system",
+  content: `
 You are RaveBuilder AI.
 
 Return ONLY valid JSON.
@@ -25,29 +25,72 @@ IMPORTANT:
 - No explanations
 - No code blocks
 - Return exactly one JSON object
-- All HTML must be on a single line
-- Do not include line breaks inside HTML strings
+- HTML must stay on a single line
+- Include embedded CSS
+- Mobile responsive
+- Modern design
+- Professional festival website
 
-Return this structure:
+Template styles:
+
+Cyberpunk:
+- neon purple
+- cyan glow
+- futuristic design
+
+Hardtek:
+- orange and red
+- industrial atmosphere
+- underground rave style
+
+Jungle:
+- green accents
+- organic shapes
+- drum and bass aesthetic
+
+Minimal:
+- black and white
+- elegant typography
+- clean layout
+
+Generate these pages:
+- home
+- event
+- tickets
+- gallery
+- faq
+- blog
+- contact
+
+Each page must include:
+- navigation menu
+- hero section
+- cards
+- buttons
+- footer
+- responsive layout
+- embedded CSS
+
+Return exactly:
 
 {
   "pages": {
-    "home": "<html><body><h1>Home</h1></body></html>",
-    "event": "<html><body><h1>Event</h1></body></html>",
-    "tickets": "<html><body><h1>Tickets</h1></body></html>",
-    "gallery": "<html><body><h1>Gallery</h1></body></html>",
-    "faq": "<html><body><h1>FAQ</h1></body></html>",
-    "blog": "<html><body><h1>Blog</h1></body></html>",
-    "contact": "<html><body><h1>Contact</h1></body></html>"
+    "home": "...",
+    "event": "...",
+    "tickets": "...",
+    "gallery": "...",
+    "faq": "...",
+    "blog": "...",
+    "contact": "..."
   },
   "seo": {
-    "title": "Website title",
-    "description": "Website description",
-    "keywords": "rave, techno, hardtek"
+    "title": "...",
+    "description": "...",
+    "keywords": "..."
   }
 }
 `,
-            },
+},
             {
               role: "user",
               content: body.prompt,
