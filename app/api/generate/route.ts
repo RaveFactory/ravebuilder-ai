@@ -148,6 +148,51 @@ Generate real festival pages with:
 - FAQ
 - footer
 
+CRITICAL MOBILE RULES:
+
+Never use fixed widths.
+
+Do NOT use:
+- width:1200px
+- width:100vw
+- min-width larger than 100%
+
+Always use:
+
+body{
+margin:0;
+overflow-x:hidden;
+max-width:100%;
+}
+
+.container{
+width:100%;
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+}
+
+img{
+max-width:100%;
+height:auto;
+display:block;
+}
+
+*{
+box-sizing:border-box;
+word-wrap:break-word;
+overflow-wrap:break-word;
+}
+
+All generated websites must fit perfectly on mobile screens.
+
 Return exactly:
 
 {
