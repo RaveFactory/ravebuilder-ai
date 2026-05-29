@@ -118,52 +118,59 @@ width:100%;
 .card{
 width:100%;
 overflow:hidden;
-max-width:100%;
 }
 
-STRICT HTML RULES:
+MOBILE LAYOUT RULES:
 
-Never generate:
+Never generate HTML tables.
 
-width:1200px
-width:100vw
-min-width:
-position:absolute
-left:
-right:
-transform:translate
+Do NOT use:
+<table>
+<tr>
+<td>
+<thead>
+<tbody>
 
-Always generate:
+For timetable use:
 
-width:100%;
-max-width:100%;
+<div class="schedule">
+  <div class="schedule-item">
+    <div class="date">...</div>
+    <div class="time">...</div>
+    <div class="artist">...</div>
+  </div>
+</div>
 
-Navigation must collapse on mobile.
+Every section must fit mobile screens.
 
-Use:
+Maximum card height: 500px.
 
-@media(max-width:768px){
-nav{
-flex-direction:column;
-align-items:center;
-}
+Never generate empty cards.
 
-.grid{
-grid-template-columns:1fr;
-}
+Never duplicate content.
 
-h1{
-font-size:32px!important;
-}
+All cards must contain:
+- image
+- title
+- text
 
-h2{
-font-size:26px!important;
-}
+Cards without content are forbidden.
 
-h3{
-font-size:22px!important;
-}
-}
+Use only CSS Grid or Flexbox.
+
+Images are mandatory in artist cards and gallery cards.
+
+Use only valid Unsplash image URLs.
+
+Generate realistic festival websites using:
+- real city names
+- real music genres
+- realistic artist names
+- realistic timetable
+- realistic ticket prices
+- realistic venues
+
+Avoid generic marketing sections.
 
 Return exactly:
 
