@@ -78,6 +78,76 @@ Each page must include:
 
 All HTML pages must contain a complete CSS block inside <style>.
 
+IMPORTANT DESIGN RULES:
+
+Every page must include a complete CSS block.
+
+Use:
+
+body{
+margin:0;
+font-family:Inter,sans-serif;
+background:#111;
+color:white;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+justify-content:center;
+padding:20px;
+}
+
+.hero{
+padding:80px 20px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.card{
+background:#1a1a1a;
+border-radius:20px;
+overflow:hidden;
+padding:20px;
+}
+
+img{
+width:100%;
+height:auto;
+border-radius:16px;
+display:block;
+}
+
+button{
+padding:14px 24px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+
+Do not generate placeholder websites.
+
+Generate real festival pages with:
+- hero section
+- artists
+- timetable
+- gallery
+- tickets
+- FAQ
+- footer
+
 Return exactly:
 
 {
