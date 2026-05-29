@@ -76,13 +76,12 @@ Each page must include:
 - modern UI
 - embedded CSS
 
-All HTML pages must contain a complete CSS block inside <style>.
-
-MOBILE CSS RULES:
+All HTML pages must contain a complete CSS block inside <MOBILE CSS RULES:
 
 body{
 margin:0;
 overflow-x:hidden;
+max-width:100%;
 }
 
 .container{
@@ -90,6 +89,7 @@ width:100%;
 max-width:1200px;
 margin:auto;
 padding:20px;
+overflow:hidden;
 }
 
 *{
@@ -105,17 +105,64 @@ display:block;
 h1,h2,h3,p{
 word-break:break-word;
 overflow-wrap:break-word;
+max-width:100%;
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
+width:100%;
 }
 
 .card{
 width:100%;
 overflow:hidden;
+max-width:100%;
+}
+
+STRICT HTML RULES:
+
+Never generate:
+
+width:1200px
+width:100vw
+min-width:
+position:absolute
+left:
+right:
+transform:translate
+
+Always generate:
+
+width:100%;
+max-width:100%;
+
+Navigation must collapse on mobile.
+
+Use:
+
+@media(max-width:768px){
+nav{
+flex-direction:column;
+align-items:center;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:32px!important;
+}
+
+h2{
+font-size:26px!important;
+}
+
+h3{
+font-size:22px!important;
+}
 }
 
 Return exactly:
