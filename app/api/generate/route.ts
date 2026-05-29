@@ -81,6 +81,44 @@ Never use images of:
 - business meeting
 - education
 
+IMAGE RULES:
+
+Use ONLY these image search keywords:
+
+concert crowd
+festival crowd
+hardtek rave
+techno festival
+dj performing
+festival stage
+laser show
+electronic music crowd
+underground rave
+hardcore festival
+
+Examples:
+
+https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f
+https://images.unsplash.com/photo-1501386761578-eac5c94b800a
+https://images.unsplash.com/photo-1514525253161-7a46d19cd819
+https://images.unsplash.com/photo-1506157786151-b8491531f063
+
+Forbidden keywords:
+
+student
+students
+education
+school
+classroom
+teacher
+office
+business
+meeting
+university
+college
+
+Never use any image related to education.
+
 Each page must include:
 - responsive navigation menu
 - mobile first design
@@ -95,7 +133,9 @@ Each page must include:
 - modern UI
 - embedded CSS
 
-All HTML pages must contain a complete CSS block inside <MOBILE CSS RULES:
+All HTML pages must contain a complete CSS block inside <style> tags.
+
+MOBILE CSS RULES:
 
 body{
 margin:0;
@@ -175,12 +215,51 @@ All cards must contain:
 
 Cards without content are forbidden.
 
+CARD RULES:
+
+Every card must contain:
+- image
+- title
+- description
+
+Never generate:
+- empty card
+- placeholder card
+- duplicate card
+- card with only a title
+- card with only an image
+
+If content is missing, do not create the card.
+
 Use only CSS Grid or Flexbox.
 
 Images are mandatory in artist cards and gallery cards.
 
 Use only valid Unsplash image URLs.
 
+IMAGE QUALITY RULES:
+
+Every image must be related to:
+- festival crowd
+- concert crowd
+- hardtek rave
+- techno festival
+- DJ performing
+- festival stage
+- laser show
+- underground rave
+
+Never use:
+- students
+- school
+- classroom
+- office
+- business
+- university
+- education
+- meeting
+
+If an image is not festival related, choose another image.
 Generate realistic festival websites using:
 - real city names
 - real music genres
