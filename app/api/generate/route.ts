@@ -14,8 +14,8 @@ export async function POST(req: Request) {
           model: "mistral-small-latest",
           messages: [
             {
-  role: "system",
-  content: `
+              role: "system",
+              content: `
 You are RaveBuilder AI.
 
 Return ONLY valid JSON.
@@ -63,7 +63,6 @@ Generate these pages:
 - contact
 
 Each page must include:
-
 - responsive navigation menu
 - mobile first design
 - max-width:1200px
@@ -78,29 +77,6 @@ Each page must include:
 - embedded CSS
 
 All HTML pages must contain a complete CSS block inside <style>.
-
-The navigation menu must use:
-
-nav{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-justify-content:center;
-}
-
-All images must use:
-
-img{
-max-width:100%;
-height:auto;
-display:block;
-}
-
-All elements must use:
-
-*{
-box-sizing:border-box;
-}
 
 Return exactly:
 
@@ -121,7 +97,7 @@ Return exactly:
   }
 }
 `,
-},
+            },
             {
               role: "user",
               content: body.prompt,
@@ -154,20 +130,25 @@ Return exactly:
       console.error("RAW CONTENT:", content);
 
       return Response.json(
-  {
-    error: "Invalid JSON from Mistral",
-  },
-  {
-    status: } catch (err) {
-  console.error("FULL ERROR:", err);
-
-  return Response.json(
-    {
-      error: "Generation failed",
-    },
-    {
-      status: 500,
+        {
+          error: "Invalid JSON from Mistral",
+          raw: content,
+        },
+        {
+          status: 500,
+        }
+      );
     }
-  );
-}
+  } catch (err) {
+    console.error("FULL ERROR:", err);
+
+    return Response.json(
+      {
+        error: "Generation failed",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
