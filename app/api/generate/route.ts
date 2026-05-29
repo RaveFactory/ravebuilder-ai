@@ -218,7 +218,7 @@ Return exactly:
         error: "Generation failed",
       },
       {
-        status: 500,
+        status: 200,
       }
     );
   }
