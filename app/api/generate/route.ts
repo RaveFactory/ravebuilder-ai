@@ -56,15 +56,15 @@ Return this exact structure:
 
     const raw = await response.json();
 
-    let content =
-      raw?.choices?.[0]?.message?.content || "";
+let content =
+  raw?.choices?.[0]?.message?.content || "";
 
-    content = content
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
+content = content
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
 
- console.log("CLEAN CONTENT:", content);
+console.log("CLEAN CONTENT:", content);
 
 try {
   const data = JSON.parse(content);
@@ -78,6 +78,19 @@ try {
     {
       error: "Invalid JSON from Mistral",
       raw: content,
+    },
+    {
+      status: 500,
+    }
+  );
+}
+
+} catch (error) {
+  console.error("FULL ERROR:", error);
+
+  return Response.json(
+    {
+      error: "Generation failed",
     },
     {
       status: 500,
