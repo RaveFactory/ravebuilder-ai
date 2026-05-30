@@ -404,6 +404,19 @@ Return exactly:
     try {
       const data = JSON.parse(content);
 
+const pages = data.pages || {};
+
+Object.keys(pages).forEach((key) => {
+  pages[key] = pages[key]
+    .replace(/woman.*fitness/gi, "")
+    .replace(/fitness/gi, "")
+    .replace(/school/gi, "")
+    .replace(/student/gi, "")
+    .replace(/classroom/gi, "");
+});
+
+data.pages = pages;
+
       return Response.json(data);
     } catch (err) {
       console.error("JSON PARSE ERROR:", err);
