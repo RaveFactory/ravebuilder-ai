@@ -117,6 +117,40 @@ meeting
 university
 college
 
+CRITICAL IMAGE VALIDATION:
+
+Before returning HTML, verify every image URL.
+
+If an image is not obviously:
+
+- festival crowd
+- concert crowd
+- rave
+- dj
+- stage
+- electronic music event
+- laser show
+
+DO NOT USE IT.
+
+Fitness images are forbidden.
+Sport images are forbidden.
+People at work are forbidden.
+Office images are forbidden.
+Business images are forbidden.
+
+If unsure, use:
+
+https://images.unsplash.com/photo-1501386761578-eac5c94b800a
+
+https://images.unsplash.com/photo-1514525253161-7a46d19cd819
+
+https://images.unsplash.com/photo-1506157786151-b8491531f063
+
+https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f
+
+Reuse these images if necessary.
+
 Never use any image related to education.
 
 Each page must include:
