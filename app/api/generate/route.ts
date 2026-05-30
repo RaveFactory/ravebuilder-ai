@@ -133,6 +133,10 @@ Each page must include:
 - modern UI
 - embedded CSS
 
+Every HTML page must contain:
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 All HTML pages must contain a complete CSS block inside <style> tags.
 
 MOBILE CSS RULES:
@@ -289,6 +293,36 @@ Example:
 "title":"Hardtek Festival France 2026",
 "description":"Festival hardtek underground à Paris",
 "keywords":"hardtek, rave, techno, festival"
+
+MANDATORY CSS:
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+}
+
+h1{
+font-size:clamp(32px,8vw,64px);
+}
+
+h2{
+font-size:clamp(24px,6vw,42px);
+}
+
+h3{
+font-size:clamp(18px,5vw,32px);
+}
+
+body{
+overflow-x:hidden;
+}
+
+*{
+max-width:100%;
+box-sizing:border-box;
+}
 
 Return exactly:
 
