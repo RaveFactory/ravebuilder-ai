@@ -100,6 +100,7 @@ export default function Page() {
     useState<string | null>(null);
   const currentHtml =
     pages[activePage] ?? "";
+  console.log("SEO", seoData);
   const pageCount =
     Object.values(pages).filter(Boolean).length;
   const canGenerate =
