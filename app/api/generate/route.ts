@@ -383,7 +383,7 @@ Return exactly:
               content: body.prompt,
             },
           ],
-          temperature: 0.7,
+          temperature: 0.3,
         }),
       }
     );
@@ -408,11 +408,29 @@ const pages = data.pages || {};
 
 Object.keys(pages).forEach((key) => {
   pages[key] = pages[key]
+
+    // images et mots interdits
     .replace(/woman.*fitness/gi, "")
     .replace(/fitness/gi, "")
     .replace(/school/gi, "")
     .replace(/student/gi, "")
-    .replace(/classroom/gi, "");
+    .replace(/classroom/gi, "")
+
+    // liens Instagram vides
+    .replace(/<a[^>]*>Instagram<\/a>/gi, "")
+    .replace(/Instagram/gi, "")
+    .replace(/Consulter Instagram/gi, "")
+
+    // réseaux sociaux vides
+    .replace(/RESTEZ CONNECTÉS/gi, "")
+    .replace(/Restez connectés/gi, "")
+
+    // iframes générées par erreur
+    .replace(/<iframe[\s\S]*?<\/iframe>/gi, "")
+
+    // sections vides
+    .replace(/<section>\s*<\/section>/gi, "")
+    .replace(/<div>\s*<\/div>/gi, "");
 });
 
 data.pages = pages;
