@@ -62,6 +62,45 @@ Generate these pages:
 - blog
 - contact
 
+CRITICAL CONTENT RULES:
+
+Each page must contain completely different content.
+
+Never duplicate:
+- sections
+- cards
+- images
+- titles
+- artists
+- schedules
+- paragraphs
+- festival descriptions
+
+HOME page:
+hero section + festival presentation
+
+EVENT page:
+festival details + schedule
+
+TICKETS page:
+ticket prices + VIP offers
+
+GALLERY page:
+photo gallery only
+
+FAQ page:
+questions and answers only
+
+BLOG page:
+news articles only
+
+CONTACT page:
+contact form + social media
+
+Every page must have unique images.
+
+Never repeat content from another page.
+
 For festival websites use only images of:
 
 - concert crowd
@@ -154,19 +193,25 @@ Reuse these images if necessary.
 Never use any image related to education.
 
 Each page must include:
-- responsive navigation menu
-- mobile first design
-- max-width:1200px
-- navigation displayed with flexbox
-- gap between menu items
-- cards displayed with CSS grid
-- images responsive
-- body margin:0
-- box-sizing:border-box
-- footer
-- modern UI
-- embedded CSS
+NAVIGATION RULES:
 
+Menu links must use:
+
+data-page="home"
+data-page="event"
+data-page="tickets"
+data-page="gallery"
+data-page="faq"
+data-page="blog"
+data-page="contact"
+
+Do NOT use:
+
+href="home.html"
+href="event.html"
+href="tickets.html"
+
+Use only data-page attributes.
 Every HTML page must contain:
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
