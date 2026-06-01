@@ -12,7 +12,10 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           model: "mistral-small-latest",
-          max_tokens: 8000,
+response_format: {
+  type: "json_object"
+},
+max_tokens: 8000,
           messages: [
             {
               role: "system",
@@ -20,12 +23,6 @@ export async function POST(req: Request) {
 You are RaveBuilder AI.
 
 Return ONLY valid JSON.
-
-Generate content only.
-
-Do NOT generate HTML.
-Do NOT generate CSS.
-Do NOT generate JavaScript.
 
 IMPORTANT:
 - No markdown
@@ -57,37 +54,27 @@ Minimal:
 - elegant typography
 - clean layout
 
-Generate a festival dataset.
+    Generate complete HTML pages.
 
-Return:
+Return ONLY valid JSON.
+
+Return exactly:
 
 {
-  "festival": {
-    "title": "",
-    "subtitle": "",
-    "description": "",
-    "location": "",
-    "dates": "",
-    "heroImage": ""
+  "pages": {
+    "home": "...",
+    "event": "...",
+    "tickets": "...",
+    "gallery": "...",
+    "faq": "...",
+    "blog": "...",
+    "contact": "..."
   },
-  "artists": [
-    {
-      "name": "",
-      "style": ""
-    }
-  ],
-  "tickets": [
-    {
-      "name": "",
-      "price": ""
-    }
-  ],
-  "faq": [
-    {
-      "question": "",
-      "answer": ""
-    }
-  ]
+  "seo": {
+    "title": "...",
+    "description": "...",
+    "keywords": "..."
+  }
 }
 
 CRITICAL CONTENT RULES:
@@ -427,10 +414,14 @@ Return exactly:
 
 {
   "pages": {
-  "home": "...",
-  "event": "...",
-  "tickets": "..."
-}
+    "home": "...",
+    "event": "...",
+    "tickets": "...",
+    "gallery": "...",
+    "faq": "...",
+    "blog": "...",
+    "contact": "..."
+  },
   "seo": {
     "title": "...",
     "description": "...",
@@ -518,14 +509,13 @@ data.pages = pages;
       console.error("RAW CONTENT:", content);
 
       return Response.json(
-        {
-          error: "Invalid JSON from Mistral",
-          raw: content,
-        },
-        {
-          status: 500,
-        }
-      );
+{
+  error: "Mistral returned invalid JSON",
+},
+{
+  status: 500,
+}
+);
     }
   } catch (err) {
     console.error("FULL ERROR:", err);
