@@ -220,22 +220,22 @@ All HTML pages must contain a complete CSS block inside <style> tags.
 
 MOBILE CSS RULES:
 
-body{
+html,body{
 margin:0;
+padding:0;
+width:100%;
 overflow-x:hidden;
-max-width:100%;
+}
+
+*{
+box-sizing:border-box;
 }
 
 .container{
 width:100%;
 max-width:1200px;
 margin:auto;
-padding:20px;
-overflow:hidden;
-}
-
-*{
-box-sizing:border-box;
+padding:15px;
 }
 
 img{
@@ -244,24 +244,16 @@ height:auto;
 display:block;
 }
 
-h1,h2,h3,p{
-word-break:break-word;
-overflow-wrap:break-word;
-max-width:100%;
-}
-
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:1fr;
 gap:20px;
-width:100%;
 }
 
 .card{
 width:100%;
 overflow:hidden;
 }
-
 MOBILE LAYOUT RULES:
 
 Never generate HTML tables.
