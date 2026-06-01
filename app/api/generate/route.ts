@@ -477,6 +477,18 @@ Object.keys(pages).forEach((key) => {
     .replace(/<section>\s*<\/section>/gi, "")
     .replace(/<div>\s*<\/div>/gi, "");
 });
+Object.keys(pages).forEach((key) => {
+  pages[key] = pages[key]
+
+    // supprime les liens html vers des pages inexistantes
+    .replace(/href="home\.html"/gi, 'data-page="home"')
+    .replace(/href="event\.html"/gi, 'data-page="event"')
+    .replace(/href="tickets\.html"/gi, 'data-page="tickets"')
+    .replace(/href="gallery\.html"/gi, 'data-page="gallery"')
+    .replace(/href="faq\.html"/gi, 'data-page="faq"')
+    .replace(/href="blog\.html"/gi, 'data-page="blog"')
+    .replace(/href="contact\.html"/gi, 'data-page="contact"');
+});
 
 data.pages = pages;
 
