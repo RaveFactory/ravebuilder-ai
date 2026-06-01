@@ -31,10 +31,7 @@ IMPORTANT:
 - No explanations
 - No code blocks
 - Return exactly one JSON object
-- HTML must stay on a single line
-- Include embedded CSS
-- Mobile responsive
-- Modern design
+
 - Professional festival website
 
 Template styles:
