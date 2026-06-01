@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import FestivalTemplate from "./components/FestivalTemplate";
 import { strToU8, zip as fflateZip } from "fflate";
 type Pages = Record<string, string>;
 type Template =
@@ -11,6 +12,13 @@ interface SeoData {
   title: string;
   description: string;
   keywords: string;
+}
+interface FestivalData {
+  festivalName: string;
+  subtitle: string;
+  description: string;
+  city: string;
+  heroImage: string;
 }
 interface TemplateCard {
   id: Template;
@@ -88,6 +96,8 @@ export default function Page() {
     useState<Template>("cyberpunk");
   const [pages, setPages] =
     useState<Pages>({});
+  const [festival, setFestival] =
+  useState<FestivalData | null>(null);
   const [activePage, setActivePage] =
     useState("home");
   const [seoData, setSeoData] =
@@ -125,34 +135,15 @@ export default function Page() {
           }),
         }
       );
-      const data = (await response.json()) as {
-        pages?: Record<string, string>;
-        seo?: {
-          title?: string;
-          description?: string;
-          keywords?: string;
-        };
-        error?: string;
-      };
+      const data = await response.json();
       if (!response.ok) {
         throw new Error(
           data.error ??
             `Server error ${response.status}`
         );
       }
-      const newPages = data.pages ?? {};
-      const seo: SeoData = {
-        title:
-          data.seo?.title ?? "",
-        description:
-          data.seo?.description ?? "",
-        keywords:
-          data.seo?.keywords ?? "",
-      };
-      setPages(newPages);
-      setSeoData(seo);
-      setHasGenerated(true);
-      setActivePage("home");
+      setFestival(data);
+setHasGenerated(true);
     } catch (err: unknown) {
       setError(
         err instanceof Error
