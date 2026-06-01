@@ -56,14 +56,38 @@ Minimal:
 - elegant typography
 - clean layout
 
-Generate these pages:
-- home
-- event
-- tickets
-- gallery
-- faq
-- blog
-- contact
+Generate a festival dataset.
+
+Return:
+
+{
+  "festival": {
+    "title": "",
+    "subtitle": "",
+    "description": "",
+    "location": "",
+    "dates": "",
+    "heroImage": ""
+  },
+  "artists": [
+    {
+      "name": "",
+      "style": ""
+    }
+  ],
+  "tickets": [
+    {
+      "name": "",
+      "price": ""
+    }
+  ],
+  "faq": [
+    {
+      "question": "",
+      "answer": ""
+    }
+  ]
+}
 
 CRITICAL CONTENT RULES:
 
