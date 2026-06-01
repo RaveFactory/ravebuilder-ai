@@ -20,6 +20,12 @@ You are RaveBuilder AI.
 
 Return ONLY valid JSON.
 
+Generate content only.
+
+Do NOT generate HTML.
+Do NOT generate CSS.
+Do NOT generate JavaScript.
+
 IMPORTANT:
 - No markdown
 - No explanations
