@@ -464,21 +464,21 @@ export default function Page() {
               </div>
             )}
             {currentHtml && (
-             <iframe
-  srcDoc={currentHtml}
-  title="preview"
-  sandbox="allow-scripts"
-  style={{
-    width: "100%",
-    maxWidth: "100%",
-    height: "900px",
-    border: "1px solid #333",
-    background: "white",
-    borderRadius: "12px",
-    overflow: "hidden",
-  }}
-/>
-            )}
+  <iframe
+    key={activePage}
+    srcDoc={currentHtml}
+    title={`preview-${activePage}`}
+    sandbox="allow-scripts"
+    style={{
+      width: "100%",
+      maxWidth: "100%",
+      height: "900px",
+      border: "1px solid #333",
+      background: "white",
+      borderRadius: "12px",
+    }}
+  />
+)}
             <div
               style={{
                 marginTop: "20px",
