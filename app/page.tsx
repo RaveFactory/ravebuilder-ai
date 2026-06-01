@@ -142,7 +142,8 @@ export default function Page() {
             `Server error ${response.status}`
         );
       }
-      setFestival(data);
+      console.log(data);
+setFestival(data);
 setHasGenerated(true);
     } catch (err: unknown) {
       setError(
