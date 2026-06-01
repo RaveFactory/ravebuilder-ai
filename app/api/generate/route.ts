@@ -12,6 +12,7 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           model: "mistral-small-latest",
+          max_tokens: 8000,
           messages: [
             {
               role: "system",
@@ -426,14 +427,10 @@ Return exactly:
 
 {
   "pages": {
-    "home": "...",
-    "event": "...",
-    "tickets": "...",
-    "gallery": "...",
-    "faq": "...",
-    "blog": "...",
-    "contact": "..."
-  },
+  "home": "...",
+  "event": "...",
+  "tickets": "..."
+}
   "seo": {
     "title": "...",
     "description": "...",
