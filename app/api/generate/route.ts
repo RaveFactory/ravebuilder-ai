@@ -481,6 +481,7 @@ Object.keys(pages).forEach((key) => {
   pages[key] = pages[key]
 
     // supprime les liens html vers des pages inexistantes
+    .replace(/<nav[\s\S]*?<\/nav>/gi, "")   
     .replace(/href="home\.html"/gi, 'data-page="home"')
     .replace(/href="event\.html"/gi, 'data-page="event"')
     .replace(/href="tickets\.html"/gi, 'data-page="tickets"')
