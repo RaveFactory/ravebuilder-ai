@@ -456,6 +456,9 @@ Return exactly:
 
     let content =
       raw?.choices?.[0]?.message?.content || "";
+    
+    console.log("RAW MISTRAL:");
+    console.log(content);
 
     content = content
       .replace(/```json/g, "")
