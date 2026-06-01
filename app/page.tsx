@@ -126,6 +126,8 @@ export default function Page() {
         }
       );
       const data = await response.json();
+
+console.log("API RESPONSE", data);
       if (!response.ok) {
         throw new Error(
           data.error ??
