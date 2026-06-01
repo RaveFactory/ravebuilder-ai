@@ -11,11 +11,11 @@ export async function POST(req: Request) {
           Authorization: `Bearer ${process.env.MISTRAL_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "mistral-small-latest",
+          model: "mistral-medium-latest",
 response_format: {
   type: "json_object"
 },
-max_tokens: 8000,
+max_tokens: 32000,
           messages: [
             {
               role: "system",
@@ -60,16 +60,9 @@ Return ONLY valid JSON.
 
 Return exactly:
 
-{
-  "pages": {
-    "home": "...",
-    "event": "...",
-    "tickets": "...",
-    "gallery": "...",
-    "faq": "...",
-    "blog": "...",
-    "contact": "..."
-  },
+"pages": {
+  "home": "..."
+}
   "seo": {
     "title": "...",
     "description": "...",
