@@ -496,7 +496,9 @@ Object.keys(pages).forEach((key) => {
 
 data.pages = pages;
 
-      return Response.json(data);
+      return Response.json({
+  debug: data
+});
     } catch (err) {
       console.error("JSON PARSE ERROR:", err);
       console.error("RAW CONTENT:", content);
